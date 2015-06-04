@@ -38,6 +38,19 @@ class WikiExtensionsMenuTest < ActiveSupport::TestCase
     assert_equal(9, menu.project_id)
   end
 
+  def test_find_or_create_range
+    # Create one menu
+    old_menu = WikiExtensionsMenu.find_or_create(9, 3)
+
+    # Create rest of them, expect in result 3 again but the old one!
+    menus = WikiExtensionsMenu.find_or_create(9, 1..5)
+    assert_equal(5, menus.size)
+
+    # Find menu with 3 (same id!)
+    new_menu = menus.to_a.find { |m| m.menu_no == 3 }
+    assert_equal(old_menu.id, new_menu.id)
+  end
+
   def test_title
     menu = WikiExtensionsMenu.find_or_create(10, 5)
     assert(!WikiExtensionsMenu.title(10, 5))

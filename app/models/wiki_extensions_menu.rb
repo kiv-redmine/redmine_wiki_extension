@@ -20,19 +20,35 @@ class WikiExtensionsMenu < ActiveRecord::Base
   belongs_to :project
   validates_presence_of :project_id
   validates_presence_of :menu_no
-  
+
   safe_attributes 'enabled', 'menu_no', 'title', 'page_name'
 
   def self.find_or_create(pj_id, no)
-    menu = WikiExtensionsMenu.where(:project_id => pj_id).where(:menu_no => no).first
-    unless menu
-      menu = WikiExtensionsMenu.new
-      menu.project_id = pj_id
-      menu.menu_no = no
-      menu.enabled = false
-      menu.save!
+    # If no is range create & load it once
+    if no.is_a?(Range)
+      # Find all menus
+      menu = WikiExtensionsMenu.where(:project_id => pj_id).where(:menu_no => no)
+
+      # Iterate over range and create menus
+      (no.to_a - menu.map(&:menu_no)).each do |num|
+        # Create new menu
+        menu << self.create_menu(pj_id, num)
+      end
+    else
+      # Find one menu
+      menu = WikiExtensionsMenu.where(:project_id => pj_id).where(:menu_no => no).first
+
+      # Create menu
+      unless menu
+        menu = self.create_menu(pj_id, no)
+      end
     end
-    return menu
+
+    menu
+  end
+
+  def self.create_menu(pj_id, no)
+    WikiExtensionsMenu.create(:project_id => pj_id, :menu_no => no, :enabled => false)
   end
 
   def self.enabled?(pj_id, no)
@@ -60,6 +76,5 @@ class WikiExtensionsMenu < ActiveRecord::Base
     return true unless enabled
     #errors.add("title", "is empty") unless attribute_present?("title")
     #errors.add("page_name", "is empty") unless attribute_present?("page_name")
-
   end
 end

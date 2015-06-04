@@ -19,15 +19,13 @@ class WikiExtensionsSetting < ActiveRecord::Base
   belongs_to :project
 
   def self.find_or_create(pj_id)
-    setting = WikiExtensionsSetting.find_by_project_id(pj_id)
-    unless setting
-      setting = WikiExtensionsSetting.new
-      setting.project_id = pj_id
-      setting.save!      
-    end
-    5.times do |i|
-      WikiExtensionsMenu.find_or_create(pj_id, i + 1)
-    end
+    # Create settings for project
+    setting = WikiExtensionsSetting.where(:project_id => pj_id).first_or_create
+
+    # Call create with range
+    WikiExtensionsMenu.find_or_create(pj_id, (1..5))
+
+    # Return settings
     return setting
   end
 
