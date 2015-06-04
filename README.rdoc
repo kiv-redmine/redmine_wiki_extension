@@ -2,6 +2,8 @@
 
 Wiki Extensions is a plugin which adds several useful wiki macros to Redmine.
 
+{<img src="https://travis-ci.org/kiv-redmine/redmine_wiki_extensions.svg?branch=testing" alt="Build Status" />}[https://travis-ci.org/kiv-redmine/redmine_wiki_extensions]
+
 http://www.r-labs.org/wiki/r-labs/Wiki_Extensions_en
 
 === Plugin installation
