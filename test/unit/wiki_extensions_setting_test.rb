@@ -18,7 +18,13 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class WikiExtensionsSettingTest < ActiveSupport::TestCase
-  fixtures :wiki_extensions_settings, :wiki_extensions_menus
+  ActiveRecord::Fixtures.create_fixtures(
+    File.dirname(__FILE__) + '/../fixtures/',
+    [
+      :wiki_extensions_menus,
+      :wiki_extensions_settings
+    ]
+  )
 
   def test_find_or_create
     assert(!WikiExtensionsSetting.find_by_project_id(5))

@@ -18,7 +18,12 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class WikiExtensionsTagRelationTest < ActiveSupport::TestCase
-  fixtures :wiki_extensions_tag_relations
+  ActiveRecord::Fixtures.create_fixtures(
+    File.dirname(__FILE__) + '/../fixtures/',
+    [
+      :wiki_extensions_tag_relations,
+    ]
+  )
 
   # Replace this with your real tests.
   def test_create

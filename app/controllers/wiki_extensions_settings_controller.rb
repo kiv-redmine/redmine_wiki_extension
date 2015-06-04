@@ -21,7 +21,7 @@ class WikiExtensionsSettingsController < ApplicationController
 
   before_filter :find_project, :authorize, :find_user
 
-  def update    
+  def update
     menus = params[:menus]
 
     setting = WikiExtensionsSetting.find_or_create @project.id
@@ -41,11 +41,12 @@ class WikiExtensionsSettingsController < ApplicationController
     rescue => e
       flash[:error] = "Updating failed." + e.message
     end
-    
+
     redirect_to :controller => 'projects', :action => "settings", :id => @project, :tab => 'wiki_extensions'
   end
 
   private
+
   def find_project
     # @project variable must be set before calling the authorize filter
     @project = Project.find(params[:id])

@@ -18,7 +18,16 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class WikiExtensionsMenuTest < ActiveSupport::TestCase
-  fixtures :wiki_extensions_menus, :wiki_extensions_settings
+  ActiveRecord::Fixtures.create_fixtures(
+    File.dirname(__FILE__) + '/../fixtures/',
+    [
+      :wiki_extensions_comments,
+      :wiki_extensions_tags,
+      :wiki_extensions_menus,
+      :wiki_extensions_votes,
+      :wiki_extensions_settings
+    ]
+  )
 
   # Replace this with your real tests.
   def test_find_or_create

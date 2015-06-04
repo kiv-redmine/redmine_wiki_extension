@@ -17,7 +17,14 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class WikiExtensionsCountTest < ActiveSupport::TestCase
-  fixtures :wiki_extensions_counts, :projects, :wikis, :wiki_pages
+  fixtures :projects, :wikis, :wiki_pages
+
+  ActiveRecord::Fixtures.create_fixtures(
+    File.dirname(__FILE__) + '/../fixtures/',
+    [
+      :wiki_extensions_counts,
+    ]
+  )
 
   def test_countup
     page_id = 2

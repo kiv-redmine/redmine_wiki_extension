@@ -17,10 +17,18 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class WikiExtensionsSettingsControllerTest < ActionController::TestCase
-  fixtures :projects, :users, :roles, :members, :enabled_modules, :wikis, 
-    :wiki_pages, :wiki_contents, :wiki_content_versions, :attachments,
-    :wiki_extensions_comments, :wiki_extensions_tags, :wiki_extensions_menus,
-    :wiki_extensions_votes, :wiki_extensions_settings
+  fixtures :projects, :users, :roles, :members, :enabled_modules, :wikis,
+    :wiki_pages, :wiki_contents, :wiki_content_versions, :attachments
+
+  ActiveRecord::Fixtures.create_fixtures(
+    File.dirname(__FILE__) + '/../fixtures/',
+    [
+      :wiki_extensions_comments,
+      :wiki_extensions_tags,
+      :wiki_extensions_menus,
+      :wiki_extensions_votes
+    ]
+  )
 
   def setup
     @controller = WikiExtensionsSettingsController.new

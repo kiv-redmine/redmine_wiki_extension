@@ -18,7 +18,12 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class WikiExtensionsCommentTest < ActiveSupport::TestCase
-  fixtures :wiki_extensions_comments
+  ActiveRecord::Fixtures.create_fixtures(
+    File.dirname(__FILE__) + '/../fixtures/',
+    [
+      :wiki_extensions_comments,
+    ]
+  )
 
   # Replace this with your real tests.
   def test_truth
