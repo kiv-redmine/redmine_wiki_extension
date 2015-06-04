@@ -45,8 +45,8 @@ How to run build on travis?
 ---------------------------
 First of all try to run tests in your environment:
 
-```ruby
-ruby plugins/redmine_more_blocks_extension/test/**/*.rb
+```bash
+bundle exec rake redmine:plugins:test NAME=redmine_wiki_extensions
 ```
 
 If everyhting is ok, push your changes into master branch and run merge script, which merge master into testing and push to remote (github):
