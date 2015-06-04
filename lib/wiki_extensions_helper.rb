@@ -60,7 +60,7 @@ module ActionView
           
               ret << "\n"
               ret << "</div>\n"
-              ret << '<h4 class="wiki_left">'
+              ret << '<h4 class="wiki_left no_content">'
               ret << "#{avatar(comment.user, :size => "20")}"
               ret << "\n"
         
@@ -136,3 +136,4 @@ module ActionView
     end
   end
 end
+

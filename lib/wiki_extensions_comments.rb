@@ -51,7 +51,6 @@ module WikiExtensionsComments
       comments = WikiExtensionsComment.where(:wiki_page_id => page.id).all
 
       raw display_comments_tree(comments,nil,page,data)
-
     end
   end
 end
