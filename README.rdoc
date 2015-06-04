@@ -32,3 +32,4 @@ This plugin works only on production mode.
 * pt-BR.yml - Marcelo Fernandes
 * pl.yml - Łukasz Rymarczyk
 * zh.yml - Tim lin,  Steven Wong
+* cs.yml - Strnadj
